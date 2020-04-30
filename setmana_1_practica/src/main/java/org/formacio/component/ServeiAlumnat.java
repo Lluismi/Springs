@@ -1,5 +1,6 @@
 package org.formacio.component;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,8 +13,17 @@ public class ServeiAlumnat {
 	 * Si el nom de l'alumne es null, no l'ha de donar d'alta
 	 * Retorna true si l'alumne s'ha inserit, false si no.
 	 */
+	
+	@Autowired
+	RepositoriAlumnes matriculados = new RepositoriAlumnesMemoria();
+	
 	public boolean matricula (int id, String alumne) {
-		return true;
+		if (alumne == null) {
+			return false;
+		} else {
+			matriculados.altaAlumne(id, alumne);
+			return true;
+		}
 	}
 	
 }

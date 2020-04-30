@@ -51,6 +51,7 @@ public class Setmana1Tests {
 	}
 
 	/**
+	 * (Hecho)
 	 * Implementau el metode ServeiAlumnat.matricula(id, nom), tal com trobareu alla especificat
 	 */
 	@Test
