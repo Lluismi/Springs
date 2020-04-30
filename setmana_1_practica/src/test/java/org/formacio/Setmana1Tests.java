@@ -69,6 +69,7 @@ public class Setmana1Tests {
 	}
 	
 	/**
+	 * (Hecho)
 	 * Modifiqueu la classe ServeiAlumnat per a que, just crear-se, inserti dos alumnes al repositori:
 	 * id = 1, nom = Antonia
 	 * id = 2, nom = Joan
