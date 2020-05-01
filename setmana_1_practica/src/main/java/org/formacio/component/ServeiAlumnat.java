@@ -34,4 +34,7 @@ public class ServeiAlumnat {
 		}
 	}
 	
+	public int numAlumnes() {
+		return matriculados.llistaAlumnes().size();
+	}
 }
