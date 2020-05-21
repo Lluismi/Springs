@@ -51,6 +51,7 @@ public class LlibreOpsBasic {
 	 * @param isbn del llibre a eliminar
 	 * @return true si s'ha esborrat el llibre, false si no existia
 	 */
+	@Transactional
 	public boolean elimina (String isbn) throws LlibreNoExisteixException {
 		try {
 			Llibre nuevo = this.carrega(isbn);
@@ -64,6 +65,7 @@ public class LlibreOpsBasic {
 	/**
 	 * Guarda a bbdd l'estat del llibre indicat
 	 */
+	@Transactional
 	public void modifica (Llibre llibre) {
 		em.merge(llibre);
 	}
@@ -73,7 +75,12 @@ public class LlibreOpsBasic {
 	 * (Aquest metode no llanca excepcions!)
 	 */
 	public boolean existeix (String isbn) {
-		return false;
+		try { 
+			Llibre nuevo = this.carrega(isbn);
+			return true;
+		} catch (LlibreNoExisteixException e) { 
+				return false; 
+			}
 	}
 
 	/**
@@ -81,7 +88,13 @@ public class LlibreOpsBasic {
 	 * Si el llibre indicat no existeix, retorna null
 	 */
 	public Recomanacio recomenacioPer (String isbn) {
-		return null;
+		Recomanacio recomanacio;
+		try { 
+			recomanacio = this.carrega(isbn).getRecomanacio();
+			} catch (LlibreNoExisteixException e) {
+				return null;
+				}
+		return recomanacio;
 	}
 	
 }
