@@ -23,9 +23,9 @@ public class LlibreOpsBasic {
 	 * Retorna el llibre amb l'ISBN indicat o, si no existeix, llança un LlibreNoExisteixException
 	 */
 	public Llibre carrega (String isbn) throws LlibreNoExisteixException {
-		Llibre exemplar = em.find(Llibre.class, isbn);
-		if(exemplar != null){ 
-			return exemplar;
+		Llibre nuevo = em.find(Llibre.class, isbn);
+		if(nuevo != null){ 
+			return nuevo;
 		}
 		else {
 			throw new LlibreNoExisteixException();	
@@ -37,13 +37,13 @@ public class LlibreOpsBasic {
 	 */
 	@Transactional
 	public void alta (String isbn, String autor, Integer pagines, Recomanacio recomanacio, String titol) {
-		Llibre exemplar = new Llibre();
-		exemplar.setIsbn(isbn);
-		exemplar.setAutor(autor);
-		exemplar.setPagines(pagines);
-		exemplar.setRecomanacio(recomanacio);
-		exemplar.setTitol(titol);
-		em.persist(exemplar);
+		Llibre nuevo = new Llibre();
+		nuevo.setIsbn(isbn);
+		nuevo.setAutor(autor);
+		nuevo.setPagines(pagines);
+		nuevo.setRecomanacio(recomanacio);
+		nuevo.setTitol(titol);
+		em.persist(nuevo);
 	}
 	
 	/**
@@ -51,14 +51,21 @@ public class LlibreOpsBasic {
 	 * @param isbn del llibre a eliminar
 	 * @return true si s'ha esborrat el llibre, false si no existia
 	 */
-	public boolean elimina (String isbn) {
-		return true;
+	public boolean elimina (String isbn) throws LlibreNoExisteixException {
+		try {
+			Llibre nuevo = this.carrega(isbn);
+			em.remove(nuevo);
+			return true;
+		} catch (LlibreNoExisteixException e){
+			return false;
+		}
 	}
 	
 	/**
 	 * Guarda a bbdd l'estat del llibre indicat
 	 */
 	public void modifica (Llibre llibre) {
+		em.merge(llibre);
 	}
 	
 	/**
