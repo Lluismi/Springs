@@ -1,5 +1,6 @@
 package org.formacio.setmana2.servei;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.formacio.setmana2.domini.Matricula;
@@ -19,6 +20,10 @@ public class ServeiEscola {
 	 * L'excepcio EdatIncorrecteException no s'ha de capturar. S'ha de propagar cap el client
 	 */
 	public List<Matricula> apunta (String curs, List<String> alumnes) throws EdatIncorrecteException {
-		return null;
+		List<Matricula> matricula = new ArrayList<>();
+		for (String alumne : alumnes) {
+			matricula.add(repEscuela.apunta(alumne, curs));
+		}
+		return matricula;
     }
 }
