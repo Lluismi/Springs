@@ -4,10 +4,15 @@ import java.util.List;
 
 import org.formacio.setmana2.domini.Matricula;
 import org.formacio.setmana2.repositori.EdatIncorrecteException;
+import org.formacio.setmana2.repositori.RepositoriEscola;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ServeiEscola {
 
-	
+	@Autowired
+	RepositoriEscola repEscuela;
 	/**
 	 * Important: els alumnes i els cursos indicats JA existeixen a la base de dades.
 	 * Per tant, els hem de carregar, no crear de nou.
