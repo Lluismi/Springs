@@ -29,4 +29,22 @@ public class Alumne {
 		this.edat = edat;
 	}
 	
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Alumne))
+			return false;
+		
+		Alumne other = (Alumne) obj;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		return true;
+	}
+	
 }
